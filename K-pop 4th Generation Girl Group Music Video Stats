@@ -1,0 +1,73 @@
+CREATE TABLE kpop_groups (
+    id INTEGER PRIMARY KEY,
+    group_name TEXT,
+    member_number INTEGER);
+INSERT INTO kpop_groups (group_name, member_number) VALUES ("LE SSERAFIM", "5");
+INSERT INTO kpop_groups (group_name, member_number) VALUES ("NEWJEANS", "5");
+INSERT INTO kpop_groups (group_name, member_number) VALUES ("IVE", "6");
+INSERT INTO kpop_groups (group_name, member_number) VALUES ("(G)-IDLE", "5");
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY,
+    group_id INTEGER,
+    song_title TEXT,
+    song_views INTEGER);
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "DITTO", "100000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "LATATA", "185000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "ELEVEN", "206000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "LATATA", "249000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "UNFORGIVEN FT. NILES RODGERS", "103000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "ATTENTION", "55000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "OMG", "174000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "ANTIFRAGILE", "194000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "LOVE DIVE", "237000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "FEARLESS", "169000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "AFTER LIKE", "240000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "SUPERSHY", "106000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "NXDE", "256000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "BADDIE", "10000000");
+INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "I DO", "19000000");
+
+SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+ORDER BY kpop_groups.group_name;
+
+SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+ORDER BY songs.song_views desc;
+
+SELECT kpop_groups.group_name, SUM(songs.song_views) AS total_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+GROUP BY kpop_groups.group_name;
+
+SELECT kpop_groups.group_name, SUM(songs.song_views) AS total_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+GROUP BY kpop_groups.group_name
+HAVING total_views>600000000;
+
+SELECT kpop_groups.group_name, songs.song_title, songs.song_views 
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+WHERE songs.song_views>=150000000
+ORDER BY songs.song_views asc;
+
+SELECT kpop_groups.group_name, songs.song_title, ROUND(AVG(songs.song_views),1) AS average_views 
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+GROUP BY kpop_groups.group_name;
+
+SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+ORDER BY songs.song_views desc;
+

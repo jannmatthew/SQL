@@ -10,64 +10,78 @@ INSERT INTO kpop_groups (group_name, member_number) VALUES ("(G)-IDLE", "5");
 CREATE TABLE songs (id INTEGER PRIMARY KEY,
     group_id INTEGER,
     song_title TEXT,
-    song_views INTEGER);
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "DITTO", "100000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "LATATA", "185000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "ELEVEN", "206000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "LATATA", "249000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "UNFORGIVEN FT. NILES RODGERS", "103000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "ATTENTION", "55000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "OMG", "174000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "ANTIFRAGILE", "194000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "LOVE DIVE", "237000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("1", "FEARLESS", "169000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "AFTER LIKE", "240000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("2", "SUPERSHY", "106000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "NXDE", "256000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("3", "BADDIE", "10000000");
-INSERT INTO songs (group_id, song_title, song_views) VALUES ("4", "I DO", "19000000");
+    musicvideo_views INTEGER);
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("2", "DITTO", "100000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("4", "LATATA", "185000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("3", "ELEVEN", "206000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("4", "LATATA", "249000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("1", "UNFORGIVEN FT. NILES RODGERS", "103000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("2", "ATTENTION", "55000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("2", "OMG", "174000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("1", "ANTIFRAGILE", "194000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("3", "LOVE DIVE", "237000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("1", "FEARLESS", "169000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("3", "AFTER LIKE", "240000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("2", "SUPERSHY", "106000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("4", "NXDE", "256000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("3", "BADDIE", "10000000");
+INSERT INTO songs (group_id, song_title, musicvideo_views) VALUES ("4", "I DO", "19000000");
 
-SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+#Organize the data by showing the K-pop group name, song title, and the music video's number of views. Order the data based on the K-pop group's name
+SELECT kpop_groups.group_name, songs.song_title, songs.musicvideo_views
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
 ORDER BY kpop_groups.group_name;
 
-SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+#Organize the data by showing the K-pop group name, song title, and the music video's number of views. Order the data based on descending music video views.
+SELECT kpop_groups.group_name, songs.song_title, songs.musicvideo_views
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
-ORDER BY songs.song_views desc;
+ORDER BY songs.musicvideo_views desc;
 
-SELECT kpop_groups.group_name, SUM(songs.song_views) AS total_views
+#How much did each K-pop group get for all of their music videos?
+SELECT kpop_groups.group_name, SUM(songs.musicvideo_views) AS total_views
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
 GROUP BY kpop_groups.group_name;
 
-SELECT kpop_groups.group_name, SUM(songs.song_views) AS total_views
+#Which K-pop groups have more than a total of 600000000 music video views?
+SELECT kpop_groups.group_name, SUM(songs.musicvideo_views) AS total_views
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
 GROUP BY kpop_groups.group_name
 HAVING total_views>600000000;
 
-SELECT kpop_groups.group_name, songs.song_title, songs.song_views 
+#What songs have more than or equal to 150000000 music video views? Order the data by ascending music video views.
+SELECT kpop_groups.group_name, songs.song_title, songs.musicvideo_views 
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
-WHERE songs.song_views>=150000000
-ORDER BY songs.song_views asc;
+WHERE songs.musicvideo_views>=150000000
+ORDER BY songs.musicvideo_views asc;
 
-SELECT kpop_groups.group_name, songs.song_title, ROUND(AVG(songs.song_views),1) AS average_views 
+#What is the average music video views each K-pop group gets for all of their songs listed in the table?
+SELECT kpop_groups.group_name, songs.song_title, ROUND(AVG(songs.musicvideo_views),1) AS average_views 
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
 GROUP BY kpop_groups.group_name;
 
-SELECT kpop_groups.group_name, songs.song_title, songs.song_views
+#Find the (G)-idle song with the least amount of music video views.
+SELECT kpop_groups.group_name, songs.song_title, MIN(songs.musicvideo_views) as musicvideo_views
 FROM kpop_groups
 JOIN songs
 ON kpop_groups.id=songs.group_id
-ORDER BY songs.song_views desc;
+WHERE kpop_groups.group_name= "(G)-IDLE";
+
+#Find the K-pop group and song that has the most amount of music video views.
+SELECT kpop_groups.group_name, songs.song_title, MAX(songs.musicvideo_views) as musicvideo_views
+FROM kpop_groups
+JOIN songs
+ON kpop_groups.id=songs.group_id
+GROUP BY kpop_groups.group_name;
 

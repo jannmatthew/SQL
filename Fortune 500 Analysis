@@ -14,7 +14,7 @@ INSERT INTO fortune_companies (company_name, industry, revenue, employees, healt
 VALUES
     ('Apple Inc.', 'Technology', 365.7, 147000, 1, 20, 12, 4.5),
     ('Walmart Inc.', 'Retail', 523.96, 2200000, 1, 15, 8, 6.2),
-    ('Exxon Mobil Corporation, 'Energy', 265.01, 72000, 0, 18, 6, 7.8),
+    ('Exxon Mobil Corporation', 'Energy', 265.01, 72000, 0, 18, 6, 7.8),
     ('Amazon.com Inc.', 'Technology', 386.06, 1370000, 1, 22, 14, 5.1),
     ('JPMorgan Chase & Co.', 'Financials', 160.1, 255998, 1, 21, 12, 6.9),
     ('Verizon Communications Inc.', 'Telecommunications', 131.88, 132600, 0, 15, 6, 5.5),

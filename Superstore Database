@@ -1,4 +1,4 @@
-#This project analyzes data based on this Superstore data set.
+#This project analyzes data based on this Superstore dataset.
 
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,

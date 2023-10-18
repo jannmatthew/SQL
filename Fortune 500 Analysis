@@ -1,4 +1,4 @@
-#This project reveals insight into this Fortune 500 dataset
+# This project reveals insight into this Fortune 500 dataset
 
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,

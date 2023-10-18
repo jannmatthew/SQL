@@ -58,16 +58,14 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-SELECT *
-FROM fortune_companies
-ORDER BY revenue desc;
+#Analysis based on the Fortune 500 dataset
 
-#What is the sum of the total revenue of each industry?
+# What is the sum of the total revenue of each industry?
 SELECT industry, ROUND(SUM(revenue)) AS industry_revenue
 FROM fortune_companies
 GROUP BY industry;
 
-#Assign all the companies as "Excellent", "Acceptable", or "Abysmal" based on the maternity leave offered.
+# Assign all the companies as "Excellent", "Acceptable", or "Abysmal" based on the maternity leave offered.
 SELECT industry, company_name, maternity_leave_weeks,
 CASE WHEN maternity_leave_weeks>=14 THEN 'Excellent'
 WHEN maternity_leave_weeks>=8 THEN 'Acceptable'
@@ -76,14 +74,14 @@ END AS mother_friendliness
 FROM fortune_companies
 ORDER BY maternity_leave_weeks desc;
 
-#Find companies that have made more than $250 billion in revenue and provide healthcare benefits for their employees.
+# Find companies that have made more than $250 billion in revenue and provide healthcare benefits for their employees.
 SELECT *
 FROM fortune_companies
 WHERE revenue>= 250
 AND healthcare_benefits= 1
 ORDER BY revenue desc;
 
-#Assign companies that provide "excellent employee benefits", where these criteria provide more than 10 weeks of maternity leave, 14 days of paid time off, and healthcare benefits; other companies that don't meet this criteria are deemed "basic employee benefits".
+# Assign companies that provide "excellent employee benefits", where these criteria provide more than 10 weeks of maternity leave, 14 days of paid time off, and healthcare benefits; other companies that don't meet this criteria are deemed "basic employee benefits".
 SELECT *,
 CASE WHEN maternity_leave_weeks>=10
 AND healthcare_benefits=1
@@ -94,20 +92,20 @@ END AS employee_benefits
 FROM fortune_companies
 ORDER BY employee_benefits;
 
-#Find the company in the technology industry that has made the most money and determine how many employees they have.
+# Find the company in the technology industry that has made the most money and determine how many employees they have.
 SELECT company_name, employees, MAX(revenue)
 FROM fortune_companies
 WHERE industry= 'Technology';
 
-#What is the average employee tenure for each industry?
+# What is the average employee tenure for each industry?
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) as average_employee_tenure
 FROM fortune_companies
 GROUP BY industry
 ORDER BY avg_employee_tenure desc;
 
-#Which companies provide healthcare benefits to their employees, and are not in the technology, healthcare, or manufacturing industries?
+# Which companies provide healthcare benefits to their employees, and are not in the technology, healthcare, or manufacturing industries?
 SELECT industry, company_name
 FROM fortune_companies
-WHERE industry NOT IN ('Technology' , 'Healthcare' , 'Manufacturing')
+WHERE industry NOT IN ('Technology', 'Healthcare', 'Manufacturing')
 AND healthcare_benefits= 1
 ORDER BY industry;

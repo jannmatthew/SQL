@@ -74,7 +74,7 @@ SELECT max(date(date_added))
 FROM "netflix_titles_info";
 
 # List all the movies and TV shows in alphabetical order. 
-select title
+SELECT title
 FROM "netflix_titles_info"
 ORDER BY title asc;
 
